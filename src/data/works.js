@@ -20,7 +20,7 @@ At PT Gaya Makmur Tractors, I've led cross-functional initiatives end-to-end: ar
 My focus is always the same: bring clarity to ambiguity, align stakeholders around a shared understanding, and deliver solutions that create real operational impact.`,
   location: "Jakarta, Indonesia",
   available: true,
-  avatar: "public/Avatar.png",
+  avatar: "/Avatar.png",
   email: "dre.hidayatullah@gmail.com",
   socials: {
     linkedin: "https://www.linkedin.com/in/andre-hidayatullah/",
@@ -415,7 +415,7 @@ export const works = [
       "Go-To-Market",
       "XCMG",
     ],
-    thumbnail: "/public/xrea.png",
+    thumbnail: "/xrea.png",
     date: "2026",
     summary:
       "Led the product readiness assessment and internal launch of Xrea, a real-time heavy equipment tracking system developed by XCMG in collaboration with PT Gaya Makmur Tractors. Ensured data readiness for customer and after-sales use, drove internal launch execution, and defined the integration roadmap with CDM to unlock scoped, role-based access to live unit data.",
@@ -596,7 +596,7 @@ export const works = [
       "AI Integration",
       "NotebookLM",
     ],
-    thumbnail: "/public/logInDataPortal.png",
+    thumbnail: "/logInDataPortal.png",
     date: "2026",
     summary:
       "Led a company-wide SOP/IK transformation and built a secure, role-based data portal for 500+ employees. Standardized processes, eliminated uncontrolled document distribution, and established a scalable foundation for secure internal data management.",
@@ -766,7 +766,7 @@ export const works = [
       "Process Automation",
       "Business Analysis",
     ],
-    thumbnail: "/public/kpiForm.png",
+    thumbnail: "/kpiForm.png",
     date: "2024",
     summary:
       "Designed and built a scalable KPI reporting system using Google Sheets and Apps Script, enabling Branch Managers, Regional Heads, and Product Managers to access real-time performance data anytime, anywhere — without disrupting cross-divisional data input workflows.",
