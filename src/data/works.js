@@ -56,7 +56,6 @@ My focus is always the same: bring clarity to ambiguity, align stakeholders arou
         "SQL (MySQL, Azure Data Studio)",
         "Google Sheets Automation (Apps Script)",
         "Laravel / PHP (collaboration & spec)",
-        "Flutter (collaboration & spec)",
       ],
     },
     {
