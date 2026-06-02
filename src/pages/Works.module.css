@@ -1,0 +1,145 @@
+.page {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+.header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 120px 32px 60px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.sub {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 500px;
+  line-height: 1.65;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 40px 0 32px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filterActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+.filterActive:hover {
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.filterCount {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  background: rgba(255,255,255,0.15);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.filterActive .filterCount {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.fadeIn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fadeIn.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Empty */
+.empty {
+  padding: 80px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Hint */
+.addHint {
+  margin-top: 60px;
+  padding: 20px 24px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+
+.addHint p {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.addHint code {
+  font-size: 0.8rem;
+  background: var(--cream);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .header { padding: 100px 20px 48px; }
+  .container { padding: 0 20px; }
+  .grid { grid-template-columns: 1fr; }
+}

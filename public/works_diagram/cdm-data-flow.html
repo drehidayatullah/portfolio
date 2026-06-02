@@ -1,0 +1,231 @@
+<!--
+  CDM Data Flow Diagram
+  Usage: embed as <iframe> or paste the inner content into your portfolio renderer
+  Responsive: flexbox layout, wraps on narrow screens
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .cdm-flow {
+    padding: 1.5rem 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    color: #1a1a1a;
+  }
+
+  .layer-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .layer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .node {
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+    max-width: 200px;
+  }
+
+  .node-title  { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .node-sub    { font-size: 11px; margin-top: 3px; line-height: 1.4; opacity: .75; }
+  .node-muted  { font-size: 11px; margin-top: 4px; opacity: .45; }
+
+  .node-coral  { background: #faece7; border: 0.5px solid #f0997b; color: #712b13; }
+  .node-purple { background: #eeedfe; border: 0.5px solid #afa9ec; color: #3c3489; }
+  .node-teal   { background: #e1f5ee; border: 0.5px solid #5dcaa5; color: #085041; }
+  .node-blue   { background: #e6f1fb; border: 0.5px solid #85b7eb; color: #0c447c; }
+  .node-gray   { background: #f5f4f0; border: 0.5px solid #ccc;    color: #1a1a1a; }
+
+  @media (prefers-color-scheme: dark) {
+    .cdm-flow    { color: #e8e6df; }
+    .layer-label { color: #888; }
+    .node-coral  { background: #3a1508; border-color: #993c1d; color: #f5c4b3; }
+    .node-purple { background: #1a1838; border-color: #534ab7; color: #cecbf6; }
+    .node-teal   { background: #04241c; border-color: #0f6e56; color: #9fe1cb; }
+    .node-blue   { background: #021e38; border-color: #185fa5; color: #b5d4f4; }
+    .node-gray   { background: #2c2c2a; border-color: #5f5e5a; color: #d3d1c7; }
+    .arrow-line,
+    .merge-line  { background: #5f5e5a; }
+    .arrow-head  { border-top-color: #5f5e5a; }
+    .arrow-head-dashed { border-top-color: #444441; }
+    .leg-solid, .leg-dashed { background: #5f5e5a; }
+    .legend-item { color: #888780; }
+    .arrow-label { color: #888780; }
+  }
+
+  .connector {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 4px 0;
+  }
+
+  .arrow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    min-width: 80px;
+    max-width: 200px;
+  }
+
+  .arrow-line        { width: 1.5px; height: 20px; background: #ccc; }
+  .arrow-head        { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #ccc; }
+  .arrow-label       { font-size: 10px; color: #aaa; white-space: nowrap; text-align: center; }
+
+  .arrow-line-blue   { background: #378ADD; }
+  .arrow-head-blue   { border-top-color: #378ADD; }
+  .arrow-label-blue  { color: #185FA5; }
+
+  .arrow-line-dashed { background: none; border-left: 1.5px dashed #ccc; height: 20px; width: 0; }
+  .arrow-head-dashed { border-top-color: #bbb; }
+
+  .merge-connector { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .merge-line      { width: 1.5px; height: 20px; background: #ccc; }
+
+  .layer-full .node { max-width: 100%; min-width: 0; width: 100%; }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 0.5px solid #e0e0d8;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #888; }
+  .leg-solid   { width: 20px; height: 1.5px; background: #ccc; }
+  .leg-blue    { width: 20px; height: 1.5px; background: #378ADD; }
+  .leg-dashed  { width: 20px; height: 0; border-top: 1.5px dashed #ccc; }
+</style>
+
+<div class="cdm-flow">
+
+  <div class="layer-label">Authentication</div>
+  <div class="layer">
+    <div class="node node-gray" style="max-width:380px;width:100%">
+      <div class="node-title">Office account (SSO via HRD)</div>
+      <div class="node-sub">Active employee = active access · Resigned = auto-revoked, no manual action needed</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer-label">Layer 1 — Company ERP database (read-only · never modified from CDM)</div>
+  <div class="layer">
+    <div class="node node-coral">
+      <div class="node-title">Unit sales data</div>
+      <div class="node-sub">Regional · Branch · Sales name · Customer · Unit · SN (primary key)</div>
+    </div>
+    <div class="node node-coral">
+      <div class="node-title">Service history</div>
+      <div class="node-sub">Fetched live by SN</div>
+      <div class="node-muted">Not stored in CDM DB</div>
+    </div>
+    <div class="node node-coral">
+      <div class="node-title">Spare part history</div>
+      <div class="node-sub">Fetched live by SN</div>
+      <div class="node-muted">Not stored in CDM DB</div>
+    </div>
+  </div>
+
+  <div class="connector">
+    <div class="arrow-col">
+      <div class="arrow-label arrow-label-blue">API POST / GET</div>
+      <div class="arrow-line arrow-line-blue"></div>
+      <div class="arrow-head arrow-head-blue"></div>
+    </div>
+    <div class="arrow-col">
+      <div class="arrow-label">fetch live (bypass CDM DB)</div>
+      <div class="arrow-line arrow-line-dashed"></div>
+      <div class="arrow-head arrow-head-dashed"></div>
+    </div>
+    <div class="arrow-col">
+      <div class="arrow-label">fetch live (bypass CDM DB)</div>
+      <div class="arrow-line arrow-line-dashed"></div>
+      <div class="arrow-head arrow-head-dashed"></div>
+    </div>
+  </div>
+
+  <div class="layer-label">Layer 2 — CDM database (editable)</div>
+  <div class="layer">
+    <div class="node node-purple" style="max-width:460px;width:100%">
+      <div class="node-title">Unit sales + condition data</div>
+      <div class="node-sub" style="margin-top:6px">SN = primary key · deduplication enforced via API · re-sync updates, never duplicates</div>
+      <div class="node-sub" style="margin-top:4px">Editable fields: unit status · current location · operating hours · technician field notes</div>
+      <div class="node-muted" style="margin-top:4px">ERP source records remain untouched</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer-label">Layer 3 — Laravel backend (API + business logic + RBAC)</div>
+  <div class="layer layer-full">
+    <div class="node node-teal" style="max-width:100%;width:100%">
+      <div class="node-title">Role-based access control</div>
+      <div class="node-sub" style="margin-top:4px">Every query scoped to authenticated user's role and org boundary · no data returned outside permitted scope · export bounded per user</div>
+    </div>
+  </div>
+
+  <div class="connector">
+    <div class="arrow-col"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+    <div class="arrow-col"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+    <div class="arrow-col"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+    <div class="arrow-col"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+  </div>
+
+  <div class="layer-label">Layer 4 — Flutter app (role-filtered views)</div>
+  <div class="layer">
+    <div class="node node-blue">
+      <div class="node-title">Sales Engineer</div>
+      <div class="node-sub">Own assigned units &amp; customers</div>
+    </div>
+    <div class="node node-blue">
+      <div class="node-title">Branch Manager</div>
+      <div class="node-sub">All units &amp; customers in own branch</div>
+    </div>
+    <div class="node node-blue">
+      <div class="node-title">Regional Head</div>
+      <div class="node-sub">All units &amp; customers in own region</div>
+    </div>
+    <div class="node node-blue">
+      <div class="node-title">Product Manager</div>
+      <div class="node-sub">Units &amp; sales per product line</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer">
+    <div class="node node-gray" style="max-width:100%;width:100%">
+      <div class="node-title">Scoped export (bounded by authenticated user's scope)</div>
+      <div class="node-sub" style="margin-top:4px">Unit report per customer · service history · spare part purchase history</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="leg-blue"></div> API POST/GET — synced to CDM DB</div>
+    <div class="legend-item"><div class="leg-dashed"></div> Direct fetch from ERP (read-only)</div>
+    <div class="legend-item"><div class="leg-solid"></div> Internal data flow</div>
+  </div>
+
+</div>

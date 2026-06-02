@@ -1,0 +1,226 @@
+<!--
+  CDM Privilege Matrix
+  Usage: embed as <iframe> or paste the inner content into your portfolio renderer
+  Responsive: table scrolls horizontally on very narrow screens
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .cdm-matrix {
+    padding: 1.5rem 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #1a1a1a;
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  thead tr { background: #f5f4f0; }
+
+  th {
+    padding: 10px 12px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    color: #5f5e5a;
+    border-bottom: 0.5px solid #ccc;
+    white-space: nowrap;
+  }
+
+  th.col-label { text-align: left; color: #1a1a1a; }
+
+  td {
+    padding: 9px 12px;
+    border-bottom: 0.5px solid #e8e6df;
+    vertical-align: middle;
+    color: #1a1a1a;
+    line-height: 1.4;
+  }
+
+  td.col-label { font-size: 12px; }
+
+  td.val { text-align: center; font-size: 12px; }
+
+  td.note {
+    font-size: 11px;
+    color: #888;
+    padding-top: 2px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid #e8e6df;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr.section-header td {
+    background: #f5f4f0;
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    padding: 6px 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid #ccc;
+  }
+
+  .yes { color: #0f6e56; font-weight: 500; }
+  .no  { color: #b4b2a9; }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 0.5px solid #e8e6df;
+    flex-wrap: wrap;
+  }
+
+  .legend span { font-size: 11px; color: #888; }
+
+  @media (prefers-color-scheme: dark) {
+    .cdm-matrix        { color: #e8e6df; }
+    thead tr           { background: #2c2c2a; }
+    th                 { color: #888780; border-bottom-color: #444441; }
+    th.col-label       { color: #e8e6df; }
+    td                 { border-bottom-color: #3a3a38; color: #e8e6df; }
+    td.note            { color: #888780; border-bottom-color: #3a3a38; }
+    tr.section-header td { background: #2c2c2a; color: #888780; border-bottom-color: #444441; }
+    .yes               { color: #5dcaa5; }
+    .no                { color: #5f5e5a; }
+    .legend            { border-top-color: #3a3a38; }
+    .legend span       { color: #888780; }
+  }
+</style>
+
+<div class="cdm-matrix">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="col-label" style="width:38%">Capability / access</th>
+          <th style="width:15.5%">Sales Eng.</th>
+          <th style="width:15.5%">Branch Mgr</th>
+          <th style="width:15.5%">Regional Head</th>
+          <th style="width:15.5%">Product Mgr</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="section-header"><td colspan="5">Data visibility</td></tr>
+
+        <tr>
+          <td class="col-label">View unit &amp; customer data</td>
+          <td class="val yes">Own portfolio</td>
+          <td class="val yes">Own branch</td>
+          <td class="val yes">Own region</td>
+          <td class="val yes">Per product line</td>
+        </tr>
+        <tr>
+          <td class="col-label">View service history</td>
+          <td class="val yes">Own portfolio</td>
+          <td class="val yes">Own branch</td>
+          <td class="val yes">Own region</td>
+          <td class="val yes">Per product line</td>
+        </tr>
+        <tr>
+          <td class="col-label">View spare part purchase history</td>
+          <td class="val yes">Own portfolio</td>
+          <td class="val yes">Own branch</td>
+          <td class="val yes">Own region</td>
+          <td class="val yes">Per product line</td>
+        </tr>
+        <tr>
+          <td class="col-label">View sales engineers per product line</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val yes">Yes</td>
+        </tr>
+
+        <tr class="section-header"><td colspan="5">Data editing (CDM DB only · ERP records untouched)</td></tr>
+
+        <tr>
+          <td class="col-label">Edit unit condition data</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+        </tr>
+        <tr>
+          <td class="note" colspan="5">Updated by technician in field only: unit status · current location · operating hours · technician field notes</td>
+        </tr>
+
+        <tr class="section-header"><td colspan="5">Customer ownership management</td></tr>
+
+        <tr>
+          <td class="col-label">Assign customer → sales engineer</td>
+          <td class="val no">—</td>
+          <td class="val yes">Within branch</td>
+          <td class="val yes">Within region</td>
+          <td class="val no">—</td>
+        </tr>
+        <tr>
+          <td class="col-label">Transfer customer → another sales eng.</td>
+          <td class="val no">—</td>
+          <td class="val yes">Within branch</td>
+          <td class="val yes">Within region</td>
+          <td class="val no">—</td>
+        </tr>
+        <tr>
+          <td class="col-label">Transfer customer → another branch</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val yes">Within region</td>
+          <td class="val no">—</td>
+        </tr>
+
+        <tr class="section-header"><td colspan="5">Export</td></tr>
+
+        <tr>
+          <td class="col-label">Export unit report per customer</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+        </tr>
+        <tr>
+          <td class="col-label">Export service history</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+        </tr>
+        <tr>
+          <td class="col-label">Export spare part purchase history</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+          <td class="val yes">Own scope</td>
+        </tr>
+        <tr>
+          <td class="col-label">Access or export data outside own scope</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+          <td class="val no">—</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span><b style="color:#0f6e56">Green</b> = access granted, scoped to own org boundary</span>
+    <span><b style="color:#b4b2a9">—</b> = no access</span>
+    <span>All exports bounded by authenticated user's scope — cross-scope bulk export not possible by design</span>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<!--
+  Xrea – Real-Time Heavy Equipment Tracking System
+  Data flow & integration roadmap diagram
+  Usage: embed as <iframe> or paste inner content into your portfolio renderer
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wrap {
+    padding: 1.5rem 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    color: #1a1a1a;
+  }
+
+  .layer-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .layer { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+  .node { border-radius: 8px; padding: 10px 14px; text-align: center; flex: 1; min-width: 130px; max-width: 200px; }
+  .node-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .node-sub   { font-size: 11px; margin-top: 4px; line-height: 1.5; opacity: .75; }
+  .node-muted { font-size: 10px; margin-top: 3px; opacity: .45; line-height: 1.3; }
+
+  .n-gray   { background: #f5f4f0; border: .5px solid #ccc;    color: #1a1a1a; }
+  .n-teal   { background: #e1f5ee; border: .5px solid #5dcaa5; color: #085041; }
+  .n-coral  { background: #faece7; border: .5px solid #f0997b; color: #712b13; }
+  .n-purple { background: #eeedfe; border: .5px solid #afa9ec; color: #3c3489; }
+  .n-amber  { background: #faeeda; border: .5px solid #ef9f27; color: #633806; }
+
+  @media (prefers-color-scheme: dark) {
+    .wrap        { color: #e8e6df; }
+    .layer-label { color: #888780; }
+    .n-gray   { background: #2c2c2a; border-color: #5f5e5a; color: #e8e6df; }
+    .n-teal   { background: #04241c; border-color: #0f6e56; color: #9fe1cb; }
+    .n-coral  { background: #3a1508; border-color: #993c1d; color: #f5c4b3; }
+    .n-purple { background: #1a1838; border-color: #534ab7; color: #cecbf6; }
+    .n-amber  { background: #241200; border-color: #854f0b; color: #fac775; }
+    .merge-line, .arrow-line { background: #5f5e5a; }
+    .arrow-head  { border-top-color: #5f5e5a; }
+    .divider     { border-top-color: #3a3a38; }
+    .phase-label { background: #2c2c2a; border-color: #444441; color: #888780; }
+    .legend      { border-top-color: #3a3a38; color: #888780; }
+  }
+
+  .merge-connector { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .merge-line { width: 1.5px; height: 20px; background: #ccc; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #ccc; }
+
+  .connector { display: flex; justify-content: center; align-items: flex-start; gap: 10px; padding: 4px 0; flex-wrap: wrap; }
+  .arrow-col { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; min-width: 130px; max-width: 200px; }
+  .arrow-line { width: 1.5px; height: 20px; background: #ccc; }
+
+  .phase-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-align: center;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: .5px solid #ccc;
+    background: #f5f4f0;
+    color: #888;
+    margin: 10px auto 8px;
+    display: inline-block;
+    align-self: center;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1.5px dashed #ccc;
+    margin: 14px 0;
+  }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: .5px solid #e8e6df;
+    font-size: 11px;
+    color: #888;
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="phase-label">Phase 1 — market readiness (launched)</div>
+
+  <div class="layer-label">Data readiness assessment</div>
+  <div class="layer">
+    <div class="node n-coral" style="max-width:100%;width:100%">
+      <div class="node-title">Xrea — XCMG real-time tracking system</div>
+      <div class="node-sub">Live unit location · hour meter (HM) · unit operational status · electric &amp; conventional units</div>
+      <div class="node-muted">Developed by XCMG in collaboration with PT Gaya Makmur Tractors</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer-label">Readiness check — what was assessed</div>
+  <div class="layer">
+    <div class="node n-gray">
+      <div class="node-title">Data completeness</div>
+      <div class="node-sub">Unit data matches what customers need to see</div>
+    </div>
+    <div class="node n-gray">
+      <div class="node-title">After-sales fit</div>
+      <div class="node-sub">Data supports proactive service &amp; fleet monitoring</div>
+    </div>
+    <div class="node n-gray">
+      <div class="node-title">Access limitation</div>
+      <div class="node-sub">No RBAC — one account sees all units nationally</div>
+      <div class="node-muted">Flagged as critical gap for future commercial scaling</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer-label">Outcome — launched</div>
+  <div class="layer">
+    <div class="node n-teal">
+      <div class="node-title">Internal launch</div>
+      <div class="node-sub">Sales team equipped to offer Xrea as value-added solution</div>
+      <div class="node-muted">June 2, 2026</div>
+    </div>
+    <div class="node n-teal">
+      <div class="node-title">Customer onboarding</div>
+      <div class="node-sub">Direct meetings · account setup · feature walkthrough</div>
+    </div>
+    <div class="node n-teal">
+      <div class="node-title">After-sales enablement</div>
+      <div class="node-sub">Team gains real-time fleet visibility to improve service response</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+  <div class="phase-label">Phase 2 — CDM integration (roadmap)</div>
+
+  <div class="layer-label">Data to be pulled from Xrea into CDM</div>
+  <div class="layer">
+    <div class="node n-amber">
+      <div class="node-title">Hour meter (HM)</div>
+      <div class="node-sub">Daily HM · average working hours calculation</div>
+    </div>
+    <div class="node n-amber">
+      <div class="node-title">Unit location</div>
+      <div class="node-sub">Real-time GPS · supports interbranch program planning</div>
+    </div>
+    <div class="node n-amber">
+      <div class="node-title">Fault alarms</div>
+      <div class="node-sub">Unit fault codes · proactive service triggers</div>
+    </div>
+    <div class="node n-amber">
+      <div class="node-title">Fuel consumption</div>
+      <div class="node-sub">Consumption rate per unit · efficiency monitoring</div>
+    </div>
+    <div class="node n-amber">
+      <div class="node-title">Operational status</div>
+      <div class="node-sub">Active / idle / offline per unit</div>
+    </div>
+  </div>
+
+  <div class="merge-connector"><div class="merge-line"></div><div class="arrow-head"></div></div>
+
+  <div class="layer-label">Integration benefit — CDM enriched with live data</div>
+  <div class="layer">
+    <div class="node n-purple">
+      <div class="node-title">Sales &amp; marketing teams</div>
+      <div class="node-sub">Unit &amp; customer data enriched with real-time field conditions</div>
+      <div class="node-muted">Scoped per user — own customers &amp; units only</div>
+    </div>
+    <div class="node n-purple">
+      <div class="node-title">After-sales support</div>
+      <div class="node-sub">Proactive service using fault alarms, HM &amp; live location</div>
+      <div class="node-muted">Interbranch program with always-updated unit position</div>
+    </div>
+    <div class="node n-purple">
+      <div class="node-title">Access — resolved</div>
+      <div class="node-sub">RBAC via CDM — each user sees only their scope, not all units nationally</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span>Phase 1 complete · Phase 2 planned</span>
+    <span>·</span>
+    <span>CDM integration resolves the national-scope access limitation identified in Phase 1</span>
+  </div>
+
+</div>
